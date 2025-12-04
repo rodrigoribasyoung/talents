@@ -1,0 +1,140 @@
+Google Forms Appscript:
+1. Enviar lotes de dados para o firebase
+2. A cada nova entrada do formulário, enviar para o firebase
+https://script.google.com/u/0/home/projects/1zXmSstnSgFbKQdenOH2SNcK_NQm501u5mO2rEgf8D0ZppnBpcEuTDC13/edit
+
+
+Firebase
+1. Banco de dados
+   1. Candidatos (existentes na planilha do formulário) e receber novos candidatos
+   2. Campos personalizados
+   3. Imagens (Logo, elementos personalizados)
+2. Autenticação
+   1. Google (@youngempreendimentos.com.br)
+   2. Email
+
+
+GitHub
+1. Versionar e commit
+2. Talvez usar a Co Pilot para aprimorar
+
+
+Vercel
+1. Deployment
+
+
+Identidade visual
+1. Dark/Light Theme
+2. Cores destaque: fe5009, 00bcbc
+3. Logo da Young
+4. Gráficos coloridos (cores do google)
+5. Fonte: Space Grotesk e Be Vietnam Pro
+
+
+Preferencialmente:
+1. Tailwind
+2. React
+3. Vite
+
+
+
+
+Nome: Young Talents (ATS)
+
+
+Objetivo: Gerenciar candidatos, enviar disparos de email mediante movimentação da pipeline, exigir campos por etapa da pipeline, emitir relatórios, realizar filtros avançados para buscar candidatos no cadastro e monitorar avanços, incluir tarefas.
+
+
+
+
+Estrutura:
+
+
+1. Dashboard
+   1. Barra lateral
+      1. candidatos por etapa
+   2. scorecards
+      1. Contratados
+      2. Reprovados
+      3. Candidatos
+      4. Taxa conversão
+      5. Entrevistas realizadas
+      6. Testes realizados
+      7. Retornos pendentes
+   3. Pizza
+      1. Origem (como ficou sabendo)
+      2. Cidade onde reside
+      3. Área de interesse
+   4. Novos inscritos (top 10)
+   5. Próximas entrevistas (top 10)
+   6. Histórico Últimas atualizações (top 10)
+2. Candidatos
+   1. Sidebar com Filtros avançados para buscar candidatos específicos e opção de salvar filtros
+   2. Elemento de Buscar (nome, tags, termos em geral)
+   3. Elementos de classificação alfabético, data, atualização mais recente/antiga
+   4. Filtro de datas padronizados e personalizados
+3. Pipeline
+   1. Modos Kanban e Lista
+      1. Cada lista da pipe ter resumo de numero de candidatos e opção de ver mais para nao precisar carregar tudo (paginação de 5,10,25,50,100,500 e 1000)
+   2. Sidebar com Filtros avançados para buscar candidatos específicos e opção de salvar filtros
+   3. Botão específico para dar Ganho/Perda - modifica o status do candidato
+4. Vagas
+   1. Abrir vaga
+      1. Formulário de abertura de vaga
+   2. Gerenciar vagas
+      1. Mostrar vagas abertas com lista de candidatos que aplicaram
+      2. Mostrar vagas em geral com opção de filtros e classificação
+   3. Botão de fechamento ou abertura da vaga no card da vaga
+   4. status visível da data
+5. Relatórios
+   1. Exportar dados em csv
+6. Campanhas
+   1. Aqui deixar um template de solicitação de campanha para o marketing, inicialmente terá que ter alguns campos padrão no formulário, para enviar a solicitação para um formulário específico do google forms do mkt
+7. Configurações
+   1. Configurar campos (Ter alguns padrões, mas ter opção de Criar, Editar, Excluir, Classificar)
+      1. Candidatos
+         1. Seção I
+            1. Todos os campos iniciais
+            2. Tags
+            3. Visibilidade
+            4. Obrigatoriedade
+            5. ID único
+            6. Botões de edição/exclusão
+         2. Seção II
+            1. Campos personalizados
+      2. Vagas
+         1. Seção I
+            1. Todos os campos iniciais
+               1. Cidades
+               2. Empresas
+               3. Áreas
+               4. Setores
+               5. Cargos
+               6. Status da vaga
+                  1. Aberta
+                  2. Fechada
+                  3. Pausada
+               7. Tags
+               8. Visibilidade
+               9. Obrigatoriedade
+               10. ID único
+               11. Botões de edição/exclusão
+         2. Seção II
+            1. Campos personalizados
+   2. Usuários
+      1. Tabela e botões de edição/exclusão
+   3. Ações em massa
+      1. Importar/Exportar CSV
+      2. Transferências
+   4. Templates de email
+      1. Opção de criar templates de email para disparo mediante movimentação da etapa do funil
+   5. Pipeline
+      1. Configurar Etapas do funil
+      2. Configurar Status do funil
+      3. Conigurar Motivos de Fechamento
+      4. Bloqueios de etapas
+         1. Opção de exigir campos de texto ou de preenchimento (validação dados) a depender de certa etapa
+8. Ajuda
+   1. Readme para usuario
+   2. Readme para desenvolvedor
+   3. Botoes de atalho para desenvolvedores: github, firebase, vercel e etc
