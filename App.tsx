@@ -1,8 +1,9 @@
 import React from 'react';
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Pipeline from './pages/Pipeline';
-import { LayoutDashboard, Users, LogOut } from 'lucide-react';
+import Dashboard from './pages/Dashboard';
+import { LayoutDashboard, Users, LogOut, Kanban } from 'lucide-react';
 
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, loading } = useAuth();
@@ -37,17 +38,46 @@ const LoginPage = () => {
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const { user, signOut } = useAuth();
+    const location = useLocation();
+
+    // Função auxiliar para estilizar o link ativo
+    const isActive = (path: string) => location.pathname === path 
+        ? 'text-primary bg-orange-50 border-primary/20 shadow-sm' 
+        : 'text-gray-600 hover:bg-gray-50 border-transparent';
+
     return (
         <div className="min-h-screen bg-[#f1f5f9] flex flex-col">
             <header className="bg-white border-b border-gray-200 sticky top-0 z-20">
                 <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-gradient-to-br from-primary to-orange-400 rounded-lg flex items-center justify-center text-white font-bold font-display">
-                            Y
+                    <div className="flex items-center gap-8">
+                        {/* Logo */}
+                        <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 bg-gradient-to-br from-primary to-orange-400 rounded-lg flex items-center justify-center text-white font-bold font-display">
+                                Y
+                            </div>
+                            <span className="font-display font-bold text-lg text-gray-900 tracking-tight hidden md:block">Young Talents</span>
                         </div>
-                        <span className="font-display font-bold text-lg text-gray-900 tracking-tight">Young Talents</span>
+
+                        {/* Menu de Navegação */}
+                        <nav className="hidden md:flex items-center gap-2">
+                            <Link 
+                                to="/dashboard" 
+                                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-all ${isActive('/dashboard')}`}
+                            >
+                                <LayoutDashboard size={18} />
+                                Dashboard
+                            </Link>
+                            <Link 
+                                to="/" 
+                                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-all ${isActive('/')}`}
+                            >
+                                <Kanban size={18} />
+                                Pipeline
+                            </Link>
+                        </nav>
                     </div>
                     
+                    {/* Perfil do Usuário */}
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-3 pr-4 border-r border-gray-200">
                              <img src={user?.photoURL} alt={user?.name} className="w-8 h-8 rounded-full bg-gray-200" />
@@ -78,6 +108,16 @@ const App: React.FC = () => {
     <AuthProvider>
         <HashRouter>
             <Routes>
+                {/* Rota da Dashboard */}
+                <Route path="/dashboard" element={
+                    <PrivateRoute>
+                        <Layout>
+                            <Dashboard />
+                        </Layout>
+                    </PrivateRoute>
+                } />
+                
+                {/* Rota da Pipeline (Raiz) */}
                 <Route path="/" element={
                     <PrivateRoute>
                         <Layout>
@@ -85,7 +125,9 @@ const App: React.FC = () => {
                         </Layout>
                     </PrivateRoute>
                 } />
-                <Route path="*" element={<Navigate to="/" replace />} />
+
+                {/* Redirecionamento Padrão */}
+                <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
         </HashRouter>
     </AuthProvider>
