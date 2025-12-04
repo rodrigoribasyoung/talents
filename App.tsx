@@ -3,7 +3,8 @@ import { HashRouter, Routes, Route, Navigate, Link, useLocation } from 'react-ro
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Pipeline from './pages/Pipeline';
 import Dashboard from './pages/Dashboard';
-import { LayoutDashboard, Users, LogOut, Kanban } from 'lucide-react';
+import Jobs from './pages/Jobs'; // Importando a página de Vagas
+import { LayoutDashboard, Users, LogOut, Kanban, Briefcase } from 'lucide-react'; // Importando ícone Briefcase
 
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, loading } = useAuth();
@@ -40,7 +41,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const { user, signOut } = useAuth();
     const location = useLocation();
 
-    // Função auxiliar para estilizar o link ativo
     const isActive = (path: string) => location.pathname === path 
         ? 'text-primary bg-orange-50 border-primary/20 shadow-sm' 
         : 'text-gray-600 hover:bg-gray-50 border-transparent';
@@ -50,7 +50,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <header className="bg-white border-b border-gray-200 sticky top-0 z-20">
                 <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-8">
-                        {/* Logo */}
                         <div className="flex items-center gap-3">
                             <div className="w-8 h-8 bg-gradient-to-br from-primary to-orange-400 rounded-lg flex items-center justify-center text-white font-bold font-display">
                                 Y
@@ -58,7 +57,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                             <span className="font-display font-bold text-lg text-gray-900 tracking-tight hidden md:block">Young Talents</span>
                         </div>
 
-                        {/* Menu de Navegação */}
                         <nav className="hidden md:flex items-center gap-2">
                             <Link 
                                 to="/dashboard" 
@@ -74,10 +72,16 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                                 <Kanban size={18} />
                                 Pipeline
                             </Link>
+                            <Link 
+                                to="/jobs" 
+                                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-all ${isActive('/jobs')}`}
+                            >
+                                <Briefcase size={18} />
+                                Vagas
+                            </Link>
                         </nav>
                     </div>
                     
-                    {/* Perfil do Usuário */}
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-3 pr-4 border-r border-gray-200">
                              <img src={user?.photoURL} alt={user?.name} className="w-8 h-8 rounded-full bg-gray-200" />
@@ -108,7 +112,6 @@ const App: React.FC = () => {
     <AuthProvider>
         <HashRouter>
             <Routes>
-                {/* Rota da Dashboard */}
                 <Route path="/dashboard" element={
                     <PrivateRoute>
                         <Layout>
@@ -117,7 +120,6 @@ const App: React.FC = () => {
                     </PrivateRoute>
                 } />
                 
-                {/* Rota da Pipeline (Raiz) */}
                 <Route path="/" element={
                     <PrivateRoute>
                         <Layout>
@@ -126,7 +128,14 @@ const App: React.FC = () => {
                     </PrivateRoute>
                 } />
 
-                {/* Redirecionamento Padrão */}
+                <Route path="/jobs" element={
+                    <PrivateRoute>
+                        <Layout>
+                            <Jobs />
+                        </Layout>
+                    </PrivateRoute>
+                } />
+
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
         </HashRouter>

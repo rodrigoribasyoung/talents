@@ -73,3 +73,25 @@ export const STAGES: PipelineStage[] = [
   'Entrevista II',
   'Selecionado'
 ];
+
+// Adicione isto ao final do arquivo types.ts
+
+export type JobStatus = 'Aberta' | 'Fechada' | 'Pausada';
+
+export interface Job {
+  id?: string;
+  title: string;
+  company: 'Young Empreendimentos' | 'Outra';
+  city: string;
+  state: string;
+  area: string;
+  type: 'CLT' | 'PJ' | 'Estágio';
+  status: JobStatus;
+  description?: string;
+  requirements?: string;
+  salaryRange?: string;
+  tags: string[];
+  createdAt: string;
+  updatedAt?: string;
+  createdBy: string;
+}
