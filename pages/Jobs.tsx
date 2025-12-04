@@ -39,14 +39,14 @@ const Jobs: React.FC = () => {
           <h1 className="text-2xl font-bold font-display text-gray-900">Vagas</h1>
           <p className="text-gray-500 text-sm">Gerencie as oportunidades abertas na Young.</p>
         </div>
-        {/* Link para futura página de criação */}
-        <button 
-          className="bg-primary hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 transition-colors w-fit opacity-50 cursor-not-allowed"
-          title="Funcionalidade em desenvolvimento"
+        {/* Botão ativado ligando à rota /jobs/new */}
+        <Link 
+          to="/jobs/new" 
+          className="bg-primary hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 transition-colors w-fit"
         >
           <Plus size={18} />
           Nova Vaga
-        </button>
+        </Link>
       </div>
 
       <div className="bg-white p-4 rounded-xl border border-gray-200 mb-6 flex items-center gap-4">
@@ -54,7 +54,7 @@ const Jobs: React.FC = () => {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
             <input 
                 type="text" 
-                placeholder="Buscar vagas..." 
+                placeholder="Buscar vagas por título ou cidade..." 
                 className="pl-10 w-full outline-none text-sm text-gray-700"
                 value={filter}
                 onChange={e => setFilter(e.target.value)}

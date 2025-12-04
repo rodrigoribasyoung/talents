@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Candidate, STAGES, PipelineStage } from '../types';
 import { X, ExternalLink, Calendar, MapPin, Mail, Phone, AlertCircle, CheckCircle, Trash2, Clock, ShieldAlert } from 'lucide-react';
 import { normalizeCity, formatDate } from '../utils/normalizers';
-import { updateCandidate, deleteCandidate } from '../services/mockFirebase';
+import { updateCandidate, deleteCandidate } from '../services/candidateService';
 import { useAuth } from '../context/AuthContext';
 
 interface SlideOverProps {

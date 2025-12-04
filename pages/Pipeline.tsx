@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Candidate, STAGES, PipelineStage } from '../types';
-import { getCandidates, updateCandidate } from '../services/mockFirebase';
+import { getCandidates, updateCandidate } from '../services/candidateService';
 import CandidateSlideOver from '../components/CandidateSlideOver';
 import { Search, Filter, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { normalizeCity } from '../utils/normalizers';

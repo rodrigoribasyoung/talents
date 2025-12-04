@@ -3,8 +3,9 @@ import { HashRouter, Routes, Route, Navigate, Link, useLocation } from 'react-ro
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Pipeline from './pages/Pipeline';
 import Dashboard from './pages/Dashboard';
-import Jobs from './pages/Jobs'; // Importando a página de Vagas
-import { LayoutDashboard, Users, LogOut, Kanban, Briefcase } from 'lucide-react'; // Importando ícone Briefcase
+import Jobs from './pages/Jobs';
+import JobForm from './pages/JobForm'; // <--- Importação adicionada
+import { LayoutDashboard, Users, LogOut, Kanban, Briefcase } from 'lucide-react';
 
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, loading } = useAuth();
@@ -128,10 +129,20 @@ const App: React.FC = () => {
                     </PrivateRoute>
                 } />
 
+                {/* Rota para Listagem de Vagas */}
                 <Route path="/jobs" element={
                     <PrivateRoute>
                         <Layout>
                             <Jobs />
+                        </Layout>
+                    </PrivateRoute>
+                } />
+
+                {/* NOVA ROTA: Formulário de Criação de Vaga */}
+                <Route path="/jobs/new" element={
+                    <PrivateRoute>
+                        <Layout>
+                            <JobForm />
                         </Layout>
                     </PrivateRoute>
                 } />
